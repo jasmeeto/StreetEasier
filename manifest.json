@@ -1,0 +1,30 @@
+{
+    "name": "StreetEasier",
+    "description": "Addon to street easy website",
+    "version": "1.0",
+    "manifest_version": 3,
+    "content_scripts": [
+        {
+          "matches": ["*://streeteasy.com/*"],
+          "js": [
+                 "contentScript.js"
+                ],
+          "all_frames" : true,
+          "run_at": "document_start"
+        }
+      ], 
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "tabs",
+        "webNavigation",
+        "storage"
+    ],
+    "host_permissions": [
+        "*://streeteasy.com/*"
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    }
+}
