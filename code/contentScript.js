@@ -8,6 +8,9 @@ function pullFromStorage() {
         }
         console.log("Updated address")
         address = items.address
+        if (address === undefined) {
+            address = "1 World Trade Center"
+        }
     });
 }
 
