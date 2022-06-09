@@ -63,19 +63,7 @@ else {
             return doc
         }
 
-        // Add date published and other vitals info to listing cards
-        Array.from(listItems).forEach(async li => {
-            const url = li.querySelector("a").href
-            console.log("fetching:", url)
-            var doc = await returnDomFromURL(url)
-            var impText = Array.from(doc.querySelectorAll(".Vitals-data")).map(x => x.innerText.trim()).join(" | ")
-            const parent = li.querySelector("address").parentElement
-            const textEl = document.createElement('div')
-            textEl.innerText = impText
-            parent.appendChild(textEl)
-            console.log("appended for:", url) 
-            console.log("appended with:", impText) 
-        })
+        
 
         // Pull listing cards from all pages 
         // START 
@@ -110,6 +98,27 @@ else {
                     searchList.appendChild(li)
                 })
             }
+
+            function addVitalsToListing(doc, li) {
+                var impText = Array.from(doc.querySelectorAll(".Vitals-data")).map(x => x.innerText.trim()).join(" | ")
+                const parent = li.querySelector("address").parentElement
+                const textEl = document.createElement('div')
+                textEl.innerText = impText
+                parent.appendChild(textEl)
+                console.log("appended with:", impText) 
+            }
+
+            const searchListInner = document.querySelector("ul.searchCardList")
+            const listItems = searchListInner.querySelectorAll("li.searchCardList--listItem")
+
+            // Add date published and other vitals info to listing cards
+            Array.from(listItems).forEach(async li => {
+                const url = li.querySelector("a").href
+                console.log("fetching:", url)
+                var doc = await returnDomFromURL(url)
+                console.log("appended for:", url) 
+                addVitalsToListing(doc, li)
+            })
         })()
         // END
 
