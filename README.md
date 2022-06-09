@@ -9,3 +9,4 @@ Chrome Extension for making StreetEasy easier to use. Currently in a badly style
 - Adds restyles the search results to use more space
 - Adds individual listing vitals like when its availble to search page
 - Adds a "Searches" link in nav bar in header to make searches easier to access
+- Pulls listing from all pages in search into 1 page

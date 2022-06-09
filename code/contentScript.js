@@ -55,14 +55,19 @@ else {
         lTwoThirds.style.width="100%"
 
 
-        // Add date published and other vitals info to listing cards
-        Array.from(listItems).forEach(async li => {
-            const url = li.querySelector("a").href
-            console.log("fetching:", url)
+        async function returnDomFromURL(url) {
             const res = await fetch(url);
             const html = await res.text();
             var parser = new DOMParser();
 	        var doc = parser.parseFromString(html, 'text/html')
+            return doc
+        }
+
+        // Add date published and other vitals info to listing cards
+        Array.from(listItems).forEach(async li => {
+            const url = li.querySelector("a").href
+            console.log("fetching:", url)
+            var doc = await returnDomFromURL(url)
             var impText = Array.from(doc.querySelectorAll(".Vitals-data")).map(x => x.innerText.trim()).join(" | ")
             const parent = li.querySelector("address").parentElement
             const textEl = document.createElement('div')
@@ -71,6 +76,42 @@ else {
             console.log("appended for:", url) 
             console.log("appended with:", impText) 
         })
+
+        // Pull listing cards from all pages 
+        // START 
+        const lastPageString = Array.from(document.querySelectorAll(".page")).pop().innerText
+        const lastPageNum = parseInt(lastPageString)
+
+        var url = new URL(window.location.href);
+
+
+        const pageNumToListItems = {}
+        const list = []
+        for (var pageNum = 2; pageNum <= lastPageNum; pageNum++) {
+            list.push((async function () {
+                const newPageNum = `${pageNum}`
+                url.searchParams.set("page", newPageNum)
+                var doc = await returnDomFromURL(url)
+
+                const pageListItems = doc.querySelectorAll("li.searchCardList--listItem")
+                console.log("LIST ITEMS:", newPageNum, pageListItems)
+                
+                pageNumToListItems[newPageNum] = pageListItems
+            })())
+        }
+
+        (async function () {
+            await Promise.all(list)
+
+            for (var pageNum = 2; pageNum <= lastPageNum; pageNum++) {
+                const newPageNum = `${pageNum}`
+                const pageListItems = pageNumToListItems[newPageNum]
+                Array.from(pageListItems).forEach(li => {
+                    searchList.appendChild(li)
+                })
+            }
+        })()
+        // END
 
     }
 
