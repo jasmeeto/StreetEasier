@@ -10,3 +10,9 @@ Chrome Extension for making StreetEasy easier to use. Currently in a badly style
 - Adds individual listing vitals like when its availble to search page
 - Adds a "Searches" link in nav bar in header to make searches easier to access
 - Pulls listing from all pages in search into 1 page
+
+## Local Testing
+- Clone repo - use urls from `Code >` buttton on base page
+- Go to `chrome://extensions/` url in browser
+- Click `Load unpacked` button
+- select `code` directory under repo in folder selector
