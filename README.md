@@ -1,6 +1,6 @@
 # StreetEasier
 
-Chrome Extension for making StreetEasy easier to use. Currently in a badly styled state but creating this for getting more progress.
+Chrome Extension for making StreetEasy easier to use. Currently in a badly styled state but publishing this for getting more progress.
 
 ## Features
 - Adds configurable commute address in the extension popup settings. This info is stored in the extension and not published anywhere.
