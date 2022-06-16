@@ -1,6 +1,6 @@
 {
     "name": "StreetEasier",
-    "description": "Addon to street easy website",
+    "description": "StreetEasier is an extension to create quick directions in StreetEasy listings and descriptions!",
     "version": "1.0",
     "manifest_version": 3,
     "content_scripts": [
