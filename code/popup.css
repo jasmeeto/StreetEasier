@@ -1,0 +1,13 @@
+body {
+    justify-content: center;
+    text-align: center;
+    width: 15rem;
+}
+
+#popup-address-form > * {
+  margin: 5px auto;
+}
+
+.popup-address-form__address-text {
+  color: #555;
+}

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="button.css">
-    <script src="./browserActionScript.js"></script>
+    <link rel="stylesheet" href="popup.css">
+    <script src="browserActionScript.js"></script>
   </head>
   <body>
     <!-- <button id="make-easier">Make Easier</button> -->
-   
-    <h2>Commute Address:</h2>
-    <h3 id="address-display"></h3>
-    <input type="text" name="commute-address" id="commute-address" placeholder="Commute Address" />
-    <button id="submit-form">Save</button>
+    <form id="popup-address-form"> 
+      <h1 class="popup-address-form__title">Commute Address</h1>
+      <p id="address-display" class="popup-address-form__address-text"></p>
+      <input type="text" name="commute-address" id="commute-address-input" placeholder="Commute Address" class="popup-address-form__address-input"/>
+      <button id="popup-address-form__submit-button" type="submit">Save</button>
+    </form>
   </body>
 </html>

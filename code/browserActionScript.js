@@ -12,12 +12,12 @@ function sendToAllTabs(message, callback) {
 // refresh of popup
 function onPageRefresh() {
     // update to current stored address
-    chrome.storage.sync.get(function(items){
+    chrome.storage.sync.get(function(items) {
         if (chrome.runtime.lastError) {
             return;
         }
         if (items.address !== undefined) {
-            var addressInput = document.getElementById("commute-address");
+            var addressInput = document.getElementById("commute-address-input");
             let display = document.getElementById("address-display");
             addressInput.value = items.address;
             display.innerText = items.address
@@ -25,24 +25,33 @@ function onPageRefresh() {
     });
 
     // set address
-    function formvalidate() {
-        console.log("formvalidate")
-        var addressValue = document.getElementById("commute-address").value;
+    function submitEventListener(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log("StreetEasier popup submit");
+        var addressValue = document.getElementById("commute-address-input").value;
         let display = document.getElementById("address-display");
         chrome.storage.sync.set({'address': addressValue}, function(){
             if (chrome.runtime.lastError) return;
-            display.innerText = addressValue
+            display.innerText = addressValue;
             sendToAllTabs({action: 'sync'});
         });
     }
 
-    let smit = document.getElementById("submit-form"); 
-    // set address on click
-    if(smit.addEventListener){
-        smit.addEventListener("click",formvalidate,false);
-    }else{
-        //ie doesn't have addEventListner
-        smit.attachEvent('onclick', formvalidate);
+    let addressForm = document.getElementById("popup-address-form");
+    let submitButton = document.getElementById("popup-address-form__submit-button");
+    setEventListener(addressForm, 'submit', submitEventListener);
+    setEventListener(submitButton, 'click', submitEventListener);
+}
+
+function setEventListener(element, eventName, listener) {
+    if (element.addEventListener) {
+        console.log(`${element.tagName} setting addEventListener: ${eventName}`);
+        element.addEventListener(eventName, listener, false);
+    } else {
+        eventName = 'on' + eventName;
+        console.log(`${element.tagName} setting attachEvent: ${eventName}`);
+        element.attachEvent(eventName, listener);
     }
 }
 
