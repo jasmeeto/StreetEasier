@@ -4,30 +4,8 @@ body {
     width: 15rem;
 }
 
-button {
-    outline: none;
-    margin: 1rem;
-    padding: 1rem;
-    border: none;
-    border-radius: 2px;
-}
-
-button.current {
-    box-shadow: 0 0 0 2px white,
-        0 0 0 4px black;
-}
-
-
-.popup-commute-address {
-    margin: 1rem 1rem;
-}
-
-.popup-address-form {
+#popup-address-form > * {
   margin: 5px auto;
-}
-
-.popup-address-form__title {
-  margin-bottom: 5px;
 }
 
 .popup-address-form__address-text {

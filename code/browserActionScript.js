@@ -17,7 +17,7 @@ function onPageRefresh() {
             return;
         }
         if (items.address !== undefined) {
-            var addressInput = document.getElementById("commute-address");
+            var addressInput = document.getElementById("commute-address-input");
             let display = document.getElementById("address-display");
             addressInput.value = items.address;
             display.innerText = items.address
@@ -29,7 +29,7 @@ function onPageRefresh() {
         e.preventDefault();
         e.stopPropagation();
         console.log("StreetEasier popup submit");
-        var addressValue = document.getElementById("commute-address").value;
+        var addressValue = document.getElementById("commute-address-input").value;
         let display = document.getElementById("address-display");
         chrome.storage.sync.set({'address': addressValue}, function(){
             if (chrome.runtime.lastError) return;
