@@ -12,7 +12,7 @@ function sendToAllTabs(message, callback) {
 // refresh of popup
 function onPageRefresh() {
     // update to current stored address
-    chrome.storage.sync.get(function(items){
+    chrome.storage.sync.get(function(items) {
         if (chrome.runtime.lastError) {
             return;
         }
@@ -25,8 +25,9 @@ function onPageRefresh() {
     });
 
     // set address
-    function formvalidate() {
-        console.log("formvalidate")
+    function submitButtonOnClick(e) {
+        e.preventDefault();
+        console.log("StreetEasier popup submit");
         var addressValue = document.getElementById("commute-address").value;
         let display = document.getElementById("address-display");
         chrome.storage.sync.set({'address': addressValue}, function(){
@@ -36,13 +37,13 @@ function onPageRefresh() {
         });
     }
 
-    let smit = document.getElementById("submit-form"); 
+    let smit = document.getElementById("submit-form-button"); 
     // set address on click
     if(smit.addEventListener){
-        smit.addEventListener("click",formvalidate,false);
-    }else{
+        smit.addEventListener("click",submitButtonOnClick,false);
+    } else {
         //ie doesn't have addEventListner
-        smit.attachEvent('onclick', formvalidate);
+        smit.attachEvent('onclick', submitButtonOnClick);
     }
 }
 
