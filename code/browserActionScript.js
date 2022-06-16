@@ -37,13 +37,31 @@ function onPageRefresh() {
         });
     }
 
-    let smit = document.getElementById("submit-form-button"); 
+    let addressForm = document.getElementById("popup-address-form");
+    let submitButton = document.getElementById("popup-address-form__submit-button");
+
     // set address on click
-    if(smit.addEventListener){
-        smit.addEventListener("click",submitButtonOnClick,false);
+    // if (submitButton.addEventListener) {
+    //     console.log('asdf');
+    //     submitButton.addEventListener("click", submitButtonOnClick, false);
+    // } else {
+    //     console.log('ASDF');
+    //     //ie doesn't have addEventListner
+    //     submitButton.attachEvent('onclick', submitButtonOnClick);
+    // }
+
+    setEventListener(addressForm, 'submit', submitButtonOnClick);
+    setEventListener(submitButton, 'click', submitButtonOnClick);
+}
+
+function setEventListener(element, eventName, listener) {
+    if (element.addEventListener) {
+        console.log(`${element.tagName} addEventListener event: ${eventName}`);
+        element.addEventListener(eventName, listener, false);
     } else {
-        //ie doesn't have addEventListner
-        smit.attachEvent('onclick', submitButtonOnClick);
+        eventName = 'on' + eventName;
+        console.log(`${element.tagName} attachEvent event: ${eventName}`);
+        element.attachEvent(eventName, listener);
     }
 }
 
