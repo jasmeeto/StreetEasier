@@ -25,7 +25,7 @@ function onPageRefresh() {
     });
 
     // set address
-    function submitButtonOnClick(e) {
+    function submitEventListener(e) {
         e.preventDefault();
         e.stopPropagation();
         console.log("StreetEasier popup submit");
@@ -38,30 +38,19 @@ function onPageRefresh() {
         });
     }
 
-    // let addressForm = document.getElementById("popup-address-form");
+    let addressForm = document.getElementById("popup-address-form");
     let submitButton = document.getElementById("popup-address-form__submit-button");
-
-    // set address on click
-    // if (submitButton.addEventListener) {
-    //     console.log('asdf');
-    //     submitButton.addEventListener("click", submitButtonOnClick, false);
-    // } else {
-    //     console.log('ASDF');
-    //     //ie doesn't have addEventListner
-    //     submitButton.attachEvent('onclick', submitButtonOnClick);
-    // }
-
-    // setEventListener(addressForm, 'submit', submitButtonOnClick);
-    setEventListener(submitButton, 'click', submitButtonOnClick);
+    setEventListener(addressForm, 'submit', submitEventListener);
+    setEventListener(submitButton, 'click', submitEventListener);
 }
 
 function setEventListener(element, eventName, listener) {
     if (element.addEventListener) {
-        console.log(`${element.tagName} addEventListener event: ${eventName}`);
+        console.log(`${element.tagName} setting addEventListener: ${eventName}`);
         element.addEventListener(eventName, listener, false);
     } else {
         eventName = 'on' + eventName;
-        console.log(`${element.tagName} attachEvent event: ${eventName}`);
+        console.log(`${element.tagName} setting attachEvent: ${eventName}`);
         element.attachEvent(eventName, listener);
     }
 }
