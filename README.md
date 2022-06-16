@@ -16,3 +16,10 @@ Chrome Extension for making StreetEasy easier to use. Currently in a badly style
 - Go to `chrome://extensions/` url in browser
 - Click `Load unpacked` button
 - select `code` directory under repo in folder selector
+
+## ICON GENERATION
+https://favicon.io/favicon-generator/
+- Backgroud Color: `#4CAF4F`
+- Font: `Roboto`
+- Font Variant: `Light 300 Normal` 
+- Font Size: `90`
