@@ -27,17 +27,18 @@ function onPageRefresh() {
     // set address
     function submitButtonOnClick(e) {
         e.preventDefault();
+        e.stopPropagation();
         console.log("StreetEasier popup submit");
         var addressValue = document.getElementById("commute-address").value;
         let display = document.getElementById("address-display");
         chrome.storage.sync.set({'address': addressValue}, function(){
             if (chrome.runtime.lastError) return;
-            display.innerText = addressValue
+            display.innerText = addressValue;
             sendToAllTabs({action: 'sync'});
         });
     }
 
-    let addressForm = document.getElementById("popup-address-form");
+    // let addressForm = document.getElementById("popup-address-form");
     let submitButton = document.getElementById("popup-address-form__submit-button");
 
     // set address on click
@@ -50,7 +51,7 @@ function onPageRefresh() {
     //     submitButton.attachEvent('onclick', submitButtonOnClick);
     // }
 
-    setEventListener(addressForm, 'submit', submitButtonOnClick);
+    // setEventListener(addressForm, 'submit', submitButtonOnClick);
     setEventListener(submitButton, 'click', submitButtonOnClick);
 }
 

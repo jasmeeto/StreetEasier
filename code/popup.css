@@ -18,8 +18,12 @@ button.current {
 }
 
 
-#commute-address {
+.popup-commute-address {
     margin: 1rem 1rem;
+}
+
+.popup-address-form {
+  margin: 5px auto;
 }
 
 .popup-address-form__title {
